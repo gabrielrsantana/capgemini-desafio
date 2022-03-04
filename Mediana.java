@@ -1,19 +1,35 @@
+
+package com.mycompany.projeto1;
+
+/**
+ *
+ * @author gabriel Rocha Santana 04/03/2022
+ */
+import java.util.Scanner;
 import java.util.Arrays;
-class Mediana{
+class Mediana {
     public static void main(String[] args) {
-        
-       int vetor[] = new int[]{9,5,4,1,8,10,3};
-       int i=0;
-       int meio=0;
-      Arrays.sort(vetor);
-      meio=((vetor.length-1)/2);
-            
+    int i=0;
+    int meio=0;    
+    int N=0;
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Quantos numeros o vetor tera?");
+    N = sc.nextInt();
+    int vetor[] = new int[N];
+    for (i = 0; i < N; i++) {
+		System.out.println("digite os numeros:");
+		vetor[i] = sc.nextInt();
+	}
+    //ordena o vetor
+    Arrays.sort(vetor);
+    meio=((vetor.length-1)/2);
       
-    for(int nome : vetor)
-            System.out.print(nome+",");
-       
-       // System.out.println("Hello, World! ="+vetor[0]); 
-        System.out.println("mediana ="+vetor[meio]);
-    }
+    // ** para ver os valores do vetor desmarque as duas linhas abaixo
+    //for(int nome : vetor)
+    //   System.out.print(nome+",");
+       System.out.println("mediana ="+vetor[meio]);
+    
+    }//main
+  
     
 }
