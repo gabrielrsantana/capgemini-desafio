@@ -30,6 +30,5 @@ class Mediana {
        System.out.println("mediana ="+vetor[meio]);
     
     }//main
-  
-    
+      
 }
