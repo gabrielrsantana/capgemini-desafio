@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.lang.Math;
 /**
  *
- * @author gabriel_2
+ * @author gabriel Rocha Santana 04/03/2022
  */
 public class Numeros {
     
@@ -53,8 +53,6 @@ public class Numeros {
 		
     }//for atual
     System.out.println("pares totais="+pares);
-  //System.out.println(Math.abs(-3));    
-
           
           
           
