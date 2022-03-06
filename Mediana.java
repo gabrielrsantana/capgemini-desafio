@@ -2,7 +2,9 @@
 /**
  * Questão 01 - Desafio Capgemini  Mediana.
  */
-package com.mycompany.projeto1;
+
+//comentado abaixo para poder rodar pelo Prompt
+//package com.mycompany.projeto1;
 
 /**
  *
