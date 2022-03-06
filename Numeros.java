@@ -55,7 +55,7 @@ public class Numeros {
 	 }//forselecao
 		
     }//for atual
-    System.out.println("pares totais que satisfazem a condição= "+pares);
+    System.out.println("\n Pares totais que satisfazem a condição= "+pares);
 
          
     }//main
