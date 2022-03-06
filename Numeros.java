@@ -4,61 +4,60 @@ Construa um algoritmo que determine o número de elementos pares do vetor que te
  */
 package com.mycompany.projeto1;
 import java.util.Scanner;
-import java.util.Arrays;
 import java.lang.Math;
 /**
  *
- * @author gabriel Rocha Santana 04/03/2022
+ * @author Gabriel Rocha Santana 05/03/2022
  */
 public class Numeros {
-    
-    
+     
       public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        //declarando variaveis
 	int x,i,N,atual,selecao,diferenca=0,pares=0;
+        int[] vet;
+        Scanner sc;
+        
 	System.out.println("Quantos numeros deseja digitar?:");
+        sc = new Scanner(System.in);
 	N = sc.nextInt();
-	int[] vet = new int[N];
-	
+	vet = new int[N];
+	//lendo os numeros no vetor
 	for (i = 0; i < N; i++) {
-		System.out.println("digite o numeros["+i+"]");
+		System.out.println("digite o ["+i+"] numero");
 		vet[i] = sc.nextInt();
 	}
-	System.out.println("digite o valor pra x: ");
+	System.out.println("digite o valor para a diferença entre os pares (x): ");
 	x = sc.nextInt();
-	
 	System.out.println("imprimindo combinações para teste...\n");
     
-    // agora percorrendo vetor e comparando
+    // agora percorrendo vetor9atual) e comparando(selecao)
     for(atual = 0; atual < vet.length;atual++) {
          for(selecao = atual+1; selecao < vet.length;selecao++) {
+          //verifica qual maior e subtrai para nao ficar negativo.
+          //poderia usar o valor absoluto
             if(vet[selecao]>vet[atual]){
                diferenca= vet[selecao]-vet[atual];
                if(diferenca == x){
-                  //  System.out.println("entrou para o par");
+                  // entrou para a quantidade de pares
                     pares++;
                }
             }else if(vet[selecao]<vet[atual]){
                diferenca= vet[atual]-vet[selecao];
                  if(diferenca == x){
-                  //  System.out.println("entrou para o par");
+                  
                     pares++;
                }
             } 
-           //teste das combinações no console,se não quiser ver comente a linha abaixo
-           System.out.println("combinacao pares ["+vet[atual]+"] - ["+vet[selecao]+"] = "+Math.abs((vet[atual]-vet[selecao]))+"\n");
+           //teste das combinações no console,para ver descomente linha abaixo
+          //System.out.println("Pares ["+vet[atual]+"] - ["+vet[selecao]+"] = "+Math.abs((vet[atual]-vet[selecao]))+"\n");
 		
-	}//forselecao
-		
+	 }//forselecao
 		
     }//for atual
-    System.out.println("pares totais="+pares);
-          
-          
-          
+    System.out.println("pares totais que satisfazem a condição= "+pares);
+
+         
     }//main
-    
-    
     
     
 }
