@@ -17,7 +17,7 @@ class Mediana {
     int tamLista=0;
     int lista[];
     Scanner sc = new Scanner(System.in);
-    //OBS: questão disse que recebe numero impar,então não foi tratado isso no código.
+    //OBS: questão disse que recebe numero impar,então não foi tratado isso no código.if tamLista % 2 == 0
     System.out.println("Quantos numeros terá a lista?");
     tamLista = sc.nextInt();
     lista = new int[tamLista];
@@ -25,14 +25,14 @@ class Mediana {
 		System.out.println("digite os numeros:");
 		lista[i] = sc.nextInt();
 	}
-    //ordena o lista
+    //ordena a lista para achar mediana
     Arrays.sort(lista);
     meio=((lista.length-1)/2);
      
-    // ** para ver os valores do lista desmarque as duas linhas abaixo
+    // ** para ver os valores da lista descomente as duas linhas abaixo
     //for(int nome : lista)
-    //   System.out.print(nome+",");
-       System.out.println("A mediana é = "+lista[meio]);
+      //     System.out.print(nome+",");
+    System.out.println("A mediana é = "+lista[meio]);
     
     }//main
   
