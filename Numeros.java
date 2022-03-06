@@ -49,8 +49,8 @@ public class Numeros {
                     pares++;
                }
             } 
-           //teste das combinações no console,para ver descomente linha abaixo
-          //System.out.println("Pares ["+vet[atual]+"] - ["+vet[selecao]+"] = "+Math.abs((vet[atual]-vet[selecao]))+"\n");
+           //teste das combinações no console,para não ver comente linha abaixo
+          System.out.println("Pares ["+vet[atual]+"] - ["+vet[selecao]+"] = "+Math.abs((vet[atual]-vet[selecao]))+"\n");
 		
 	 }//forselecao
 		
