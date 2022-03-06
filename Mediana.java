@@ -28,8 +28,7 @@ class Mediana {
     //ordena a lista para achar mediana
     Arrays.sort(lista);
     meio=((lista.length-1)/2);
-     
-    // ** para ver os valores da lista descomente as duas linhas abaixo
+     // para ver os valores da lista descomente as duas linhas abaixo
     //for(int nome : lista)
       //     System.out.print(nome+",");
     System.out.println("A mediana é = "+lista[meio]);
