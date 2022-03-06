@@ -1,4 +1,7 @@
 
+/**
+ * Questão 01 - Desafio Capgemini  Mediana.
+ */
 package com.mycompany.projeto1;
 
 /**
@@ -11,24 +14,27 @@ class Mediana {
     public static void main(String[] args) {
     int i=0;
     int meio=0;    
-    int N=0;
+    int tamLista=0;
+    int lista[];
     Scanner sc = new Scanner(System.in);
-    System.out.println("Quantos numeros o vetor tera?");
-    N = sc.nextInt();
-    int vetor[] = new int[N];
-    for (i = 0; i < N; i++) {
+    //OBS: questão disse que recebe numero impar,então não foi tratado isso no código.
+    System.out.println("Quantos numeros terá a lista?");
+    tamLista = sc.nextInt();
+    lista = new int[tamLista];
+    for (i = 0; i < tamLista; i++) {
 		System.out.println("digite os numeros:");
-		vetor[i] = sc.nextInt();
+		lista[i] = sc.nextInt();
 	}
-    //ordena o vetor
-    Arrays.sort(vetor);
-    meio=((vetor.length-1)/2);
-      
-    // ** para ver os valores do vetor desmarque as duas linhas abaixo
-    //for(int nome : vetor)
+    //ordena o lista
+    Arrays.sort(lista);
+    meio=((lista.length-1)/2);
+     
+    // ** para ver os valores do lista desmarque as duas linhas abaixo
+    //for(int nome : lista)
     //   System.out.print(nome+",");
-       System.out.println("mediana ="+vetor[meio]);
+       System.out.println("A mediana é = "+lista[meio]);
     
     }//main
-      
+  
+    
 }
