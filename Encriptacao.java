@@ -33,12 +33,11 @@ public class Encriptacao {
     linhas=colunas; //total de linhas
     //instancia matriz com tamanho total de linhas/colunas 
     matriz = new char[(int)linhas][(int)colunas];
+    //teste se esta dentro dos requisitos 
     boolean res= validacaoTamanho((int)linhas,(int)colunas,texto.length());
     if(res){
-        System.out.println("tamanhos validos..encriptando...\n");
-        
-        
-    }else{
+        //System.out.println("Linha x Coluna >= TamTexto..encriptando...\n");
+      }else{
         System.out.println("Teste de validação falhou.Saindo do programa...");
         System.exit(0);
     }
@@ -73,7 +72,7 @@ public class Encriptacao {
 
 //testa condição linhas x colunas >= Tam texto
 public static boolean validacaoTamanho(int lin,int col,int tamTexto){
-    System.out.println("tamanho do texto="+tamTexto);
+   // System.out.println("tamanho do texto="+tamTexto);
     if(((lin * col) >= tamTexto)){
         return true;
     }else { 
