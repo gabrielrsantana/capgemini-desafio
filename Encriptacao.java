@@ -1,7 +1,8 @@
 /*
 Desafio Capgemini  Questão 03
  */
-package com.mycompany.projeto1;
+
+//package com.mycompany.projeto1;
 
 import java.util.Scanner;
 
