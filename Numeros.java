@@ -2,7 +2,8 @@
  * Questão 2- Dado um vetor de inteiros n e um inteiro qualquer x.
 Construa um algoritmo que determine o número de elementos pares do vetor que tem uma diferença igual ao valor de x.
  */
-package com.mycompany.projeto1;
+//comentado abaixo para poder rodar pelo prompt 
+//package com.mycompany.projeto1;
 import java.util.Scanner;
 import java.lang.Math;
 /**
