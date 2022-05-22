@@ -1,0 +1,509 @@
+API angular
+
+Start By Capgemini trilha java 22/05/2022
+
+- sistema desenvolvido em qualquer linguagem web para que aplicacoes de terceiros consigam ter acessso.
+- REST - termo usado para requisicoes atraves de nossas APIS. usam GET ou POST por exemplo.
+  O padrão REST determina como deve ser realizada a Transferência de Estado Representacional (Representational State Transfer — REST),
+FrontENd FrameWorks e linguagens
+-Angular *
+-react
+-VueJs
+
+Back-End frameworks e linguagens
+-PHP * / Slim Framwork 
+- JSP /Spring
+- C# / ASP.NET MVC
+
+//baixar o XAMPP + Node.js 10.15.3 LTS + Angular 7.2.10
+
+ng new projeto-api
+
+
+- copiar .htaccess para uma pasta php,para liberar
+ no servidos as requisiçoes POST, GET..etc. E retira a extensão .php dos arquivos
+
+
+
+//criar
+C:\xampp\htdocs\api\php\
+C:\xampp\htdocs\api\projeto-api
+
+//ir no XAMPP e criar base de dados de nome API.
+- vai em SQP tab e digita:
+
+ CREATE TABLE cursos(
+ idCurso INT AUTO_INCREMENT PRIMARY KEY,
+ nomeCurso(varchar 30),
+ valorCurso DECIMAL(10,2)
+
+)
+
+INSERT INTO cursos VALUES(null,"Angular",850)
+
+
+//abrir pasta projeto-api
+
+//criar no VSCOde conexao.php
+
+<?
+$url = "localhost";
+$usuario ="root";
+$senha = "";
+$base = "api";
+
+$conexao = mysqli_connect($url,$usuario,$senha,$base);
+?>
+
+
+//criar no VSCOde listar.php
+
+<?
+include("conexao.php");
+$sql ="select * from cursos";
+$executar = mysqli_query($conexao,$sql);
+$cursos =[];
+
+$indice =0;
+while($linha = mysqli_fetch_assoc($executar)){
+
+ $cursos[$indice]['idCurso']= $linha['idCurso'];
+ $cursos[$indice]['nomeCurso']= $linha['nomeCurso'];
+ $cursos[$indice]['valorCurso']= $linha['valorCurso'];
+ indice++;
+}
+
+//encapsular em JSON
+ json_encode(['cursos'=> $cursos]); //observar se conchete e fora ou como esta ai
+
+ var_dump('$cursos');
+
+?>
+
+
+//criar cadastrar.php
+
+include("conexao.php");
+//obter dados
+$obterDados = file_get_contents("php://input");
+
+//extrai5r dados do JSON
+$extrair = json_decode($obterDados);
+
+//separar dados do JSON
+$nomeCurso = extrair->cursos->nomeCurso;
+$valorCurso = extrair->cursos->valorCurso;
+
+//SQL
+$sql ="INSERT INTO cursos(nomeCurso,valorCurso) VALUES ('$nomeCurso','$valorCurso')";
+mysqli_query($conexao,$sql);
+
+
+//exportar os dados cadastrados
+$curso = [
+'nomeCurso' => $nomeCurso,
+'valorCurso' => $valorCurso
+]
+
+json_encode(['curso']=>$curso)
+
+
+//criar uma copiar do cadastar.php e renomeiar para alterar.php
+
+include("conexao.php");
+//obter dados
+$obterDados = file_get_contents("php://input");
+
+//extrai5r dados do JSON
+$extrair = json_decode($obterDados);
+
+//separar dados do JSON
+$idCurso = extrair->cursos->idCurso;
+$nomerCurso = extrair->cursos->nomeCurso;
+$valorCurso = extrair->cursos->valorCurso;
+
+//SQL
+$sql ="UPDATE cursos SET nomeCurso='$nomeCurso', valorCurso=$valorCurso, WHERE idCurso= $idCurso";
+mysqli_query($conexao,$sql);
+
+
+//exportar os dados cadastrados
+$curso = [
+'idCurso = $idCurso,
+'nomeCurso' => $nomeCurso,
+'valorCurso' => $valorCurso
+]
+
+json_encode(['curso']=>$curso)
+
+//############
+//criar uma copiar do cadastar.php e excluir.php
+
+include("conexao.php");
+//obter dados
+$obterDados = file_get_contents("php://input");
+
+//extrai5r dados do JSON
+$extrair = json_decode($obterDados);
+
+//separar dados do JSON
+$idCurso = extrair->cursos->idCurso;
+
+
+//SQL
+$sql ="DELETE FROM cursos WHERE idCurso= $idCurso";
+mysqli_query($conexao,$sql);
+
+
+
+
+//###########ir no arquivo de conexao
+
+///arrumar caracteres especiais
+//no VSCOde conexao.php
+
+<?
+$url = "localhost";
+$usuario ="root";
+$senha = "";
+$base = "api";
+
+$conexao = mysqli_connect($url,$usuario,$senha,$base);
+
+//arrumar caracteres especiais
+mysqli_set_charset($conexao,"utf8");
+
+
+?>
+
+
+Aula03 - confirando Angular   node v 10.
+//no prompt. criar htdocs e api na pasta XAMPP
+c:\\xampp\htdocs\api> ng new app-php
+//nao cria rotas
+//usa CSS convencional
+
+
+//ir na paasta app-php
+promtp: ng s
+
+
+//abrir app.module.ts
+import {httpClientModule} from './@angular/common/http'
+import {FormsModule} from '@angular/forms';
+
+
+imports:[
+browzerModule,
+HttpClientModule,   //criar angular e php
+FormsModule
+],
+
+//criar componentes Aula 3.D
+ng g c curso
+
+//no app.component.html apaga tudo e coloca
+<app-curso></app-curso>
+
+
+//curso.component.html
+<p>curso works!</p>
+
+
+
+//no curso.component.ts
+
+nome:string ="Ralf";
+
+ngonInit(){
+
+}
+
+//Aula 04 - 
+//no curso.component.ts
+ngonInit(){
+
+}
+//cadastro
+cadastro():void{
+ alert("cadastro");//para teste
+}
+
+
+//selecao
+selecao():void{
+ alert("seleco");//para teste
+}
+
+//alterar
+alterar():void{
+ alert("rewmover");//para teste
+}
+
+//remover
+remover():void{
+ alert("remover");//para teste
+}
+
+//no curso.component.html
+
+<button (click)="cadastro()">cadastrar</button>
+<button (click)="selecao()">selecionar</button>
+<button (click)="alterar()">alterar</button>
+<button (click)="remover()">excluir</button>
+
+
+//criar curso.ts na pasta src\app\curso
+export class Curso{
+
+//a '?' diz que essa informacao talvez nao exista
+   nomeCurso:string,valorCurso:number,idCurso?:number
+
+
+}//fim export
+
+
+//no curso.component.ts
+import { httpClient } from '@angular/common/http'
+
+//URLBASE, para as requisições
+url ="http://locahost:8080/api/php"
+
+//vetor de cursos
+vetor:Curso[];
+
+
+
+//construtor
+constructor(private http:httpClient){}
+
+//criar servico
+
+       pasta/ component 
+ng g s curso/curso
+
+
+
+//curso.service.ts
+import {httpClient} from '@angular/common/http'
+import {map} from 'rxjs/operators'  //listas elementos da tabela do banco de dados
+
+//URL,local dos arquivos PHP
+url ="http://locahost:8080/api/php"
+
+//vetor
+vetor:Curso[];
+
+//construtor
+constructor(private http:HttpClient){}
+
+//obter todos os cursos  Aula 5A
+obterCursos():Observable<Curso[]>{
+  return this.http.get(this.url+"listar").pipe(  //pipe é para trabalhar arquivo de mandeira linear.o primeiro depois segundo..etc
+	map((res)=>{
+	this.vetor = res['cursos'];
+	return this.vetor;
+
+     })
+ )
+}
+
+
+//no curso.component.ts
+
+//vetor
+vetor:Curso[]; //importar em cima tambem import {Curso} from ''
+//objeto da classe Curso
+curso = new Curso();
+
+constructor(private curso_service:cursoService){}
+
+ngonInit(){
+//ao iniciar o sistema,devera listar os cursos
+  this.selecao();
+}
+
+selecao(){
+  this.curso_servico.obterCursos().subscribe(
+ (res:Curso[]) => {
+   this.vetor =res;
+  }
+)
+
+}//selecao
+
+
+//###no curso.component.html
+
+<table border="1">
+<tr *ngFor="let v of vetor">
+ <td>{{v.nomeCurso}}</td>
+ <td>{{v.valorCurso}}</td>
+
+</tr>
+</table>
+
+
+//Aula 06 criando metodo cadastro
+// em curso.service.ts
+
+import {httpClient} from '@angular/common/http'
+import {map} from 'rxjs/operators'  //listas elementos da tabela do banco de dados
+
+//URL,local dos arquivos PHP
+url ="http://locahost:8080/api/php"
+
+//vetor
+vetor:Curso[];
+
+//construtor
+constructor(private http:HttpClient){}
+
+//obter todos os cursos  Aula 5A
+obterCursos():Observable<Curso[]>{
+  return this.http.get(this.url+"listar").pipe(  //pipe é para trabalhar arquivo de mandeira linear.o primeiro depois segundo..etc
+	map((res)=>{
+	this.vetor = res['cursos'];
+	return this.vetor;
+
+     })
+ )
+}
+
+//cadastrar curso
+cadastrarCurso(c:Curso):Observable<Curso[]>{
+
+//cadastrar é o arquivo php,nao precisa extensao
+//cursos é o nome do JSON no modulo php
+return this.http.post(this.url+'cadastrar',{cursos:c})
+.pipe(map((res)=>{
+	this.vetor.push(res['cursos']);
+       return this.vetor;
+  })) 
+}
+
+//implementado Aula 7.A
+removerCurso(c:Curso):Observable<Curso[]>{
+const params = new HttpParams().set("idCurso",c.idCurso.toString());
+return this.http.delete(this.url+'excluir',{params:params})
+.pipe(map(res)=>{
+ const filtro =this.vetor.filter((curso)=>{
+ return +curso['idCurso'] !== +c.idCurso;  //filtra para ver qual dado sera removido.
+   });
+
+  return this.vetor = filtro;
+ })
+
+}//remover
+
+
+//no curso.component.ts
+
+cadastro(){
+this.curso_servico.cadastrarCurso(this.curso).subscribe(
+ (res:Curso[])=>{
+  //adicionando dados ao vetor
+  this.vetor =res;
+  
+  //limpar os atributos
+this.curso.nomeCurso=null;
+this.curso.valorCurso=null;
+
+//atualizar a listagem
+this.selecao();
+ 
+
+  }
+)
+}
+
+
+//no curso.component.html
+
+<form>
+<label>Curso</label>
+ <input type="text" name="nomeCurso" [(ngModel)]="curso.nomeCurso">
+<br>
+<label>Valor</label>
+ <input type="text" name="valorCurso" [(ngModel)]="curso.valorCurso">
+<br>
+<button (click)="cadastro(this.curso)">Cadastrar</button>
+<button (click)="alterar(this.curso)">Alterar</button>
+<button (click)="remover(this.curso)">Excluir</button>
+</form>
+
+ <table border="1">
+ <tr *ngFor="let v of vetor">
+ <td>{{v.nomeCurso}}</td>
+ <td>{{v.valorCurso}}</td>
+ <td><button (click)="selecionarCurso(v)">selecionar Curso</button></td>
+
+</tr>
+</table>
+
+
+//excluir cursos
+
+
+
+//ir em curso.component.ts
+
+remover(){
+this.curso_servico.removerCurso(this.curso).subscribe(
+ (res:Curso[])=>{
+   this.vetor = res;
+  this.curso.nomeCurso=null;
+   this.curso.valorCurso=null;
+  }
+)
+}//remover
+
+
+//selecionar curso especifico
+selecionarCurso(c:Curso){
+this.curso.idCurso =c.idCurso;
+this.curso.nomeCurso =c.nomeCurso;
+this.curso.valorCurso =c.valorCurso;
+}
+
+
+//no curso.service.ts
+
+atualizarCurso(c:Curso):Observable<Curso[]>{
+//executa a alteracao via url
+return this.http.put(this.url+'alterar',{cursos:c})
+ //percorrer o vetor para saber qual é p id do curso alterado
+.pipe(map((res)=>{
+ const cursoAlterado = this.vetor.find((item)=>{
+  return +item['idCurso'] === +['idCurso']
+  });
+//altera o valor do vetor local
+ if(cursoAlterado){
+   cursoAlterado['nomeCurso'] = c['nomeCurso'];
+   cursoAlterado['valorCurso'] = c['valorCurso'];
+  }
+ return this.vetor;
+
+ }))
+}
+
+
+//aula 08
+//no curso.component.ts
+
+alterar(){
+ this.curso_servico.atualizarCurso(this.curso).subscribe(
+ (res)=>{
+  this.vetor = res;
+
+ //limpar os valores do ibjeto
+this.curso.nomeCurso=null;
+this.curso.valorCurso=null;
+//atualiza
+this.selecao(); 
+
+  }
+)
+
+}//alterar
+
