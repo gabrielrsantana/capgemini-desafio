@@ -1,0 +1,332 @@
+Angular JS v7 programa start By capgemini
+
+npm install -g @angular/cli
+
+ng new my-app
+cd my-app
+ng serve --open //open nao obrigatorio
+ ou ng s
+
+
+ng  g component meu-component
+
+//diretivas
+*Ngif
+*NgFor
+
+//###############data binding
+no app.component.ts
+	nome: string ="Ralf"
+	imagem: string ="http://www.google.com/foto2.jpg"
+no app.component.html
+	<h1> {{  nome }}</h1>
+
+saida: <h1> Ralf</h1>
+
+
+<img src="{{ imagem}}">
+	OU
+<img [src]="imagem">
+	OU
+<img bind-src="imagem">
+
+//############## Event Binding
+no app.component.ts
+	mensagem(){
+	window.alert("ola mundo");
+	}
+
+no app.component.html
+	<button (click)="mensagem()">clique aqui</button>
+
+
+//############# two way data binding (o html conversa com o arquivo.ts)
+tem que impotar o FormsModel
+no app.module.ts
+	import {FormsModule} from '@angular/forms';
+
+ imports:[
+	 BrowzerModule,
+	 FormsModule	<---------- inserir aqui para acesso ao two way data binding
+ 	],
+
+
+no app.component.ts
+	nome: string ="Ralf"	
+	pessoa:any={
+		nome:"ralf",
+		idade:29,
+		cidade:"Blumenal"
+	}
+no app.component.html
+	<input type="text" [(ngModel)]="nome">
+<input type="text" [(ngModel)]="pessoa.idade">
+	<h1>{{ nome }}</h1>
+
+//############## templates aula05
+ng new exemplo05
+
+no app.component.html	
+<!-- selecao de paginas-->
+<!-- se a variavel p1 for verdadeira mostra template pagina1, senao mostra pagina2-->
+<span *ngIf="p1;then pagina1 else pagina2"></span>
+<hr>
+<!-- seletor de paginas-->
+<button (click)="alterarPagina()">alterar pagina </button>
+<ng-template #pagina1>pagina 01	</ng-template>
+<ng-template #pagina2>pagina 02	</ng-template>
+
+no app.component.ts
+	// variavel da pagina 1 
+	p1:boolean =true;
+alterarPagina(){
+   this.p1 = !=this.p1;
+}
+
+//########### Tubos (Pipes)
+ng new exemplo06
+
+//no app.component.html
+
+<h1>{{ nome | uppercase}}</h1> //saida maiscula na tela
+
+//no app.component.ts
+nome:string= "Ralf";
+
+
+
+//############## Serviços , ações Aula 7C
+ng new exemplo07
+ng g c cursos
+ng g s cursos/cursos
+
+//no app.component.html
+  apaga
+
+
+//cursos.service.ts
+@injectable({
+providedIn: 'root'   //acesso total ao servico, se quisesse restringir para o componente cursos colocava 'cursos'
+})
+export class CursosService{
+constructor(){
+
+ }
+//vetor de cursos
+private vetorCursos: Curso[] = [
+  new Curso("angular", 800,"desenvolvimento"),
+  new Curso("PHP", 590,"desenvolvimento"),
+  new Curso("Photoshop", 470,"desgin")
+];
+
+//cadastro de cursos
+public cadastrar(curso: Curso){
+   this.vetorCursos.push();
+}
+
+//selecao de cursos
+public listar(){
+return this.vetorCursos;
+}
+
+//alteracao de cursos
+public alterar(id: numer, curso:Curso){
+  this.vetorCursos[id] = curso;
+}
+
+
+//exclusao de cursos
+public excluir(id:Curso){
+this.vetorCursos.splice(id,1);
+}
+
+}//fim cursosService
+
+
+
+//criar Curso.ts
+export class Curso{
+
+public nomeCurso:string;
+public valorCurso:number;
+public areaCurso:string;
+
+constructor(nome:string,valor:number,area:string){
+ this.nomeCurso=nome;
+ this.valorCurso=valor;
+ this.areaCurso=area;
+}
+
+}//fim class curso
+
+
+//no cursos.component.ts
+
+//cria e depois pede pra importar.Aqui seria como um vetor espelho
+private vetorCursos:Curso[]; 
+private curso:Curso; 
+private id:numer;
+
+constructor(private servico:CursosService){
+	
+}
+
+
+
+
+//no cursos.component.html
+
+<form>
+ <input type="text" placeholder ="curso">
+ <input type="number" placeholder ="valor">
+ <input type="text" placeholder ="Area">
+ <input type="button" value ="cadastrar">
+</form>
+
+
+<table>
+<tr>
+ <td>curso </td>
+ <td>valor </td>
+ <td> area</td>
+ <td>acoes </td>
+</tr>
+</table>
+
+
+//no cursos.component.css
+form{
+ width:800px;
+ margin:30px auto;
+ border: solid 2px black;
+ padding:5px;
+}
+
+input[type="text"],input[type=number]{
+ border:solid 1px #CCC;
+ border-radius:5px;
+ padding:5px;
+ width:190px;
+}
+input[type="button"]{
+ border:solid 1px green;
+ color:FFF;
+ width:150px;
+}
+
+
+//no cursos.component.ts
+//no app.module.ts lembrar de importar FormsModule,no import=[]
+ngOnInit(){
+this.curso = new Curso();
+  this.vetorCursos = this.servico.listar();
+}
+
+
+
+//no cursos.component.html
+
+<form>
+ <input type="text" placeholder ="curso"[(ngModel)="curso.curso"] name="nomeCurso">
+ <input type="number" placeholder ="valor" [(ngModel)="curso.valor"] name="valorCurso">
+ <input type="text" placeholder ="Area" [(ngModel)="curso.area"] name="areaCurso">
+ <input type="button" value ="Cadastrar" (click)="cadastrar()" *ngIf="id < 0">
+<input type="button" value ="Editar" *ngIf="id >= 0">
+</form>
+
+
+<table>
+<tr>
+ <td>curso </td>
+ <td>valor </td>
+ <td> area</td>
+ <td>acoes </td>
+</tr>
+
+<tr *ngFor="let curso of vetorCursos">
+ <td>{{ curso.nomeCurso }}</td>
+ <td>{{ curso.areaCurso }}</td>
+ <td>{{ curso.valorCurso }}</td>
+</tr>
+
+</table>
+
+//em cursos.component.ts ,criar as funções
+ngOnInit(){
+ this.id= -1;
+  this.curso = new Curso();
+  this.vetorCursos = this.servico.listar();
+}
+cadastrar(){
+ this.servico.cadastrar(this.curso);
+ this.curso = new Curso();
+}
+excluir(id:number){
+ this.servico.excluir(id);
+ this.id =-1;
+}
+
+//criado depois
+editar(id:number){
+ this.id = id;
+ this.curso = new Curso(
+ this.vetorCursos[id].nomeCurso,
+ this.vetorCursos[id].valorCurso,
+ this.vetorCursos[id].areaCurso,
+
+);//para preencher os campos
+
+atualizar(){
+ this.servico.alterar(this.id, this.curso);
+ this.curso = new Curso();
+ this.id = -1; //para o botao ser cadastrar depois
+}
+
+
+ this.servico.editar(id);
+}
+
+
+//criando excluir
+//no cursos.component.html
+
+<form>
+ <input type="text" placeholder ="curso"[(ngModel)="curso.curso"] name="nomeCurso">
+ <input type="number" placeholder ="valor" [(ngModel)="curso.valor"] name="valorCurso">
+ <input type="text" placeholder ="Area" [(ngModel)="curso.area"] name="areaCurso">
+ <input type="button" value ="cadastrar" (click)="cadastrar()">
+ <input type="button" value ="Atualizar" (click)="atualizar()">
+</form>
+
+
+<table>
+<tr>
+ <td>curso </td>
+ <td>valor </td>
+ <td> area</td>
+ <td>acoes </td>
+</tr>
+
+<tr *ngFor="let curso of vetorCursos;let id = index">
+ <td>{{ curso.nomeCurso }}</td>
+ <td>{{ curso.areaCurso }}</td>
+ <td>{{ curso.valorCurso }}</td>
+<button (click)="editar(id)">Editar </button>
+ <td><button (click)="excluir(id)">excluir</button></td>
+</tr>
+
+</table>
+
+//### criar exemplo08 com rotas, app-routing.module.ts
+
+//criar componente
+ng g c inicio
+ng g c sobre
+
+
+
+
+
+
+
+
